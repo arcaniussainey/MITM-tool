@@ -2,11 +2,13 @@
 A MITM tool made by @arcaniussainey and @PopcornFilling
 
 
-#    MITM-tool
-Goals: 
-    1.) Intercept traffic
-    2.) Modify traffic
-    3.) deploy proxy servers
+##    MITM-tool
+**Goals:**
+
+    * Intercept traffic
+    * Modify traffic
+    * deploy proxy servers
     
-Usage: 
-    None
+**Usage:** 
+
+    *None
