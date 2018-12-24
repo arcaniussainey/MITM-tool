@@ -22,8 +22,11 @@ def Banner():
 
  """, 'red', attrs=['bold'])
 
-banner_info = """ Version: v.0.1
+banner_info = """
+          Version: v.0.1
 Made By: @Linux-fisher, ☢arcaniussainey
+
+
 """
 
 # Program
@@ -32,7 +35,7 @@ Made By: @Linux-fisher, ☢arcaniussainey
 
 # Check for root, not universal but it works
 if os.geteuid() != 0:
-    print("This tool requires root")
+    print("This tool requires root", file=sys.stderr)
     sys.exit(1)
 
 # The interface
@@ -51,7 +54,7 @@ def start():
         while True:
             interface()
     except Exception as e:
-        print("Error {} has occured".format(e))
+        print("Error {} has occured".format(e), file=sys.stderr)
         sys.exit()
 # Begin the program
 # start()

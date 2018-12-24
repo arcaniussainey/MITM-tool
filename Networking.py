@@ -6,7 +6,7 @@ try:
     import platform
     from scapy.all import * # optomise later
 except:
-    print("There was a problem importing packages, make sure the requirements are installed")
+    print("There was a problem importing packages, make sure the requirements are installed", file=sys.stderr)
     sys.exit()
 # actual code
 PctCnt = 0;
