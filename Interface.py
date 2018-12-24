@@ -20,11 +20,11 @@ def Banner():
     |___/_|\__,_|_| |_|\__,_|\___|_|  \___|\__,_|
   =================================================
 
-                 Version: v.0.1
-      Made By: @Linux-fisher, ☢arcaniussainey
-
  """, 'red', attrs=['bold'])
 
+banner_info = """ Version: v.0.1
+Made By: @Linux-fisher, ☢arcaniussainey
+"""
 
 # Program
 
