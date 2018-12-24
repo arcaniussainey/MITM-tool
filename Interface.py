@@ -27,10 +27,10 @@ interface() # for testing purposes
 
 def start():
     try:
+        # things that need to happen for the program to start
         print(banner)
         # Infinite loop
         while True:
-            # things that need to happen for the program to start
             interface()
     except:
         sys.exit()
