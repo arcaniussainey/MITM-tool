@@ -15,6 +15,7 @@ except Exception as E:
 # actual code
 
 # start the curses screen handling
+# https://docs.python.org/3/howto/curses.html
 def startScreen():
     # create a screen obj, turn on cbreak, enable specil handlers for keypad
     screen = curses.initscr()
@@ -29,9 +30,7 @@ def endScreen():
     curses.echo()
     curses.endwin()
   #
-def drawWin(h, w, y, z):
+def drawWin(h, w, x, y):
     # create a new window oject of the specified h(eight), w(idth), begin y, and begin x
     return curses.newwin(h, w, y, x)
   #
-def pingWIndow():
-    # create a window for the ping utility

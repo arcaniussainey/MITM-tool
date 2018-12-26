@@ -1,3 +1,4 @@
+#!/usr/local/bin
 # imports
 try:
     from __future__ import print_function #python 2? idk why i added this but its staying
@@ -10,6 +11,7 @@ except:
     print("There was a problem importing packages, make sure the requirements are installed", file=sys.stderr)
     sys.exit()
 # actual code
+R, G, Y, B, P, LB, Grey, E = '\033[31m', '\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m', '\033[0;0m'
 PctCnt = 0;
 nps = nmap.PortScanner()
 
@@ -18,7 +20,7 @@ def PathP(packet):
     # gets the packets src and destination
     PctCnt += 1
     print(f"Packet #{PctCnt} @{packet[0][1].src} ―→ {packet[0][1].dst} ")
-  #
+    #
 def PacketPrint(in):
     # colors a packet
     cprint(str(in), 'blue', attrs=["bold"]) # print in blue
@@ -28,13 +30,19 @@ def PacketPrint(in):
 # scanner types
   # the target is the ip, the ports are the range of ports as such 34-40, or 22-181
 def individualScan(targ, ports):
-    SD = nps.scan(str(targ), str(ports))
+    nps.scan(str(targ), str(ports))
     # get the state of the targeted device, the open ports, vendor, etc
-    state = SD['scan']['']
-    return """
+    PD = """"""
+    for host in nps.all_hosts():
+        PD += f"""
+|-------------{R}Host:{E} {B}{host}@{nps[host].hostname()}{E}-------------|
+| {R}Mac ADDR:{E} {B}nps[host]['addresses']['mac']{E}
+| {R}IPv4:{E} {B}nps[host]['addresses']['ipv4']{E}
+| {R}VENDOR:{E} {B}nps[host]['vendor'][nps[host]['addresses']['mac']]{E}
+| {R}STATE:{E} {B}nps[host]['status']['mac']{E}
+                """)
 
 
-           """
   #
 def CheckOnline():
     nps.scan(arguments='-pn')
@@ -52,7 +60,7 @@ def PacketTrace(f=""):
 def Nuke(f=""):
     NukeMessage = "☢ Doom is incoming ☢"
 
-    
+
 PD = """
 {
 	'hostnames':
@@ -61,53 +69,53 @@ PD = """
 			 'type': ''
 			}
 		 ],
-	 'addresses': 
+	 'addresses':
 		{
 			'ipv4': '192.168.0.1',
 			 'mac': '2C:7E:81:80:BC:51'
 		},
-	 'vendor': 
+	 'vendor':
 		{
 			'2C:7E:81:80:BC:51': 'Arris Group'
 		},
-	 'status': 
+	 'status':
 		{
 			'state': 'up',
 			 'reason': 'arp-response'
 		},
-	 'tcp': 
+	 'tcp':
 		{
-			80: 
+			80:
 				{
 					'state': 'open',
-					'reason': 'syn-ack', 
-					'name': 'tcpwrapped', 
-					'product': '', 
-					'version': '', 
-					'extrainfo': '', 
-					'conf': '8', 
+					'reason': 'syn-ack',
+					'name': 'tcpwrapped',
+					'product': '',
+					'version': '',
+					'extrainfo': '',
+					'conf': '8',
 					'cpe': ''
-				}, 
-			1900: 
+				},
+			1900:
 				{
-					'state': 'open', 
-					'reason': 'syn-ack', 
-					'name': 'http', 
-					'product': 'Cisco DPC3828S WiFi cable modem', 
-					'version': '', 
-					'extrainfo': '', 
-					'conf': '10', 
+					'state': 'open',
+					'reason': 'syn-ack',
+					'name': 'http',
+					'product': 'Cisco DPC3828S WiFi cable modem',
+					'version': '',
+					'extrainfo': '',
+					'conf': '10',
 					'cpe': 'cpe:/h:cisco:dpc3828s'
-				}, 
-			8080: 
+				},
+			8080:
 				{
-					'state': 'open', 
-					'reason': 'syn-ack', 
-					'name': 'http', 
-					'product': 'Mongoose httpd', 
-					'version': '', 
-					'extrainfo': '', 
-					'conf': '10', 
+					'state': 'open',
+					'reason': 'syn-ack',
+					'name': 'http',
+					'product': 'Mongoose httpd',
+					'version': '',
+					'extrainfo': '',
+					'conf': '10',
 					'cpe': 'cpe:/a:cesanta:mongoose'
 				}
 		}
