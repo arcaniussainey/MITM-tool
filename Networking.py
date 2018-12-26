@@ -51,3 +51,65 @@ def PacketTrace(f=""):
   #
 def Nuke(f=""):
     NukeMessage = "☢ Doom is incoming ☢"
+
+    
+PD = """
+{
+	'hostnames':
+		 [
+			{'name': '',
+			 'type': ''
+			}
+		 ],
+	 'addresses': 
+		{
+			'ipv4': '192.168.0.1',
+			 'mac': '2C:7E:81:80:BC:51'
+		},
+	 'vendor': 
+		{
+			'2C:7E:81:80:BC:51': 'Arris Group'
+		},
+	 'status': 
+		{
+			'state': 'up',
+			 'reason': 'arp-response'
+		},
+	 'tcp': 
+		{
+			80: 
+				{
+					'state': 'open',
+					'reason': 'syn-ack', 
+					'name': 'tcpwrapped', 
+					'product': '', 
+					'version': '', 
+					'extrainfo': '', 
+					'conf': '8', 
+					'cpe': ''
+				}, 
+			1900: 
+				{
+					'state': 'open', 
+					'reason': 'syn-ack', 
+					'name': 'http', 
+					'product': 'Cisco DPC3828S WiFi cable modem', 
+					'version': '', 
+					'extrainfo': '', 
+					'conf': '10', 
+					'cpe': 'cpe:/h:cisco:dpc3828s'
+				}, 
+			8080: 
+				{
+					'state': 'open', 
+					'reason': 'syn-ack', 
+					'name': 'http', 
+					'product': 'Mongoose httpd', 
+					'version': '', 
+					'extrainfo': '', 
+					'conf': '10', 
+					'cpe': 'cpe:/a:cesanta:mongoose'
+				}
+		}
+}
+"""
