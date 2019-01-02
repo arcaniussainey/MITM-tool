@@ -98,7 +98,7 @@ def PacketTrace(f=""):
     sniff(filter="f", prn=PathP);
   #
 
-
+# below here is just example data for me to mess with, when i cant replicate
 NmapPD = """
 {
 	'hostnames':

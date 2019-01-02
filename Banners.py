@@ -103,4 +103,4 @@ Banners = {
 
 
 def ReturnBanner():
-    random.choice()
+    random.choice(Banners) # selects a rando choice in the banners
