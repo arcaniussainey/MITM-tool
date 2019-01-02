@@ -41,7 +41,22 @@ def individualScan(targ, ports):
 | {R}VENDOR:{E} {B}nps[host]['vendor'][nps[host]['addresses']['mac']]{E}
 | {R}STATE:{E} {B}nps[host]['status']['mac']{E}
                 """)
-
+        for prot in nps[host].all_protocols():
+            PD += f"""
+|----------Protocals--------
+PROTOCOL: {prot}
+            """
+            # after adding the protocol, it adds ports on the protocol
+            lport = nps[host][prot].keys()
+            lport.sort()
+            for port in lport: # loop ports
+                PD += f"""
+|=-- PORT: {port} | STATE: {nps[host][prot][port]['state']}
+                """ # print port and state
+            # exiting third loop
+        # exiting second loop
+    # in function definition
+    print(PD) # testing purposes, PD would be returned to the curses menu
 
   #
 def CheckOnline():
