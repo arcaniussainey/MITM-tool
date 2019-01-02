@@ -12,8 +12,8 @@ except:
     sys.exit()
 # actual code
 R, G, Y, B, P, LB, Grey, E = '\033[31m', '\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m', '\033[0;0m'
-PctCnt = 0;
-nps = nmap.PortScanner()
+PctCnt = 0; # the packet count
+nps = nmap.PortScanner() # the port scanner
 
 # packet parsers
 def PathP(packet):
@@ -23,6 +23,7 @@ def PathP(packet):
     #
 def PacketPrint(in):
     # colors a packet
+    # how will this work with curses ?
     cprint(str(in), 'blue', attrs=["bold"]) # print in blue
   #
 # settings
@@ -59,8 +60,12 @@ PROTOCOL: {prot}
     print(PD) # testing purposes, PD would be returned to the curses menu
 
   #
-def CheckOnline():
-    nps.scan(arguments='-pn')
+def CheckDeviceOnline(subnet):
+    OnlineD = """{Online Devices}"""
+    nps.scan(arguments=f'-sP {subnet}') # scans given devices, such as 192.68.6.* or 10.0.0.0/14
+    for host in nps.all_hosts():
+        OnlineD += f""" Device: {G}{nps[host]['addresses']['mac']}{E} : {B}nps[host]['status']['state']{E} """ # get a devices mac, and state and show them
+
 # sniffer types
   #
 def RawSniff(f=""):
@@ -70,13 +75,11 @@ def RawSniff(f=""):
   #
 def PacketTrace(f=""):
     # sniff using the packet address filter
-    sniff(filter="f", prn=AddrP);
+    sniff(filter="f", prn=PathP);
   #
-def Nuke(f=""):
-    NukeMessage = "☢ Doom is incoming ☢"
 
 
-PD = """
+NmapPD = """
 {
 	'hostnames':
 		 [
