@@ -61,11 +61,16 @@ PROTOCOL: {prot}
 
   #
 def CheckDeviceOnline(subnet):
-    OnlineD = """{Online Devices}"""
-    nps.scan(arguments=f'-sP {subnet}') # scans given devices, such as 192.68.6.* or 10.0.0.0/14
-    for host in nps.all_hosts():
-        OnlineD += f""" Device: {G}{nps[host]['addresses']['mac']}{E} : {B}nps[host]['status']['state']{E} """ # get a devices mac, and state and show them
-
+    OnlineD = """\n===|: Online Devices :|===\n""" # doesnt handle not getting anything back
+    nps.scan(arguments=f'-sP {subnet} --exclude 127.0.0.1') # scans given devices, such as 192.68.6.* or 10.0.0.0/14
+    for host in nps.all_hosts(): # loop through scanned addresses
+        if 'mac' in nps[host]['addresses']: # if there is a mac address then print it
+            OnlineD += f""" Device: {G}{nps[host]['addresses']['mac']}{E} : {R}{nps[host]['status']['state']}{E} \n""" # get a devices mac, and state and show them
+        else if 'ipv4' in nps[host]['addresses']: # if there is an ip, print it
+            OnlineD += f""" Device: {G}{nps[host]['addresses']['1pv4']}{E} : {R}{nps[host]['status']['state']}{E} \n""" # get a devices ipv4, and state and show them
+        else: # if there is neither, say unknown
+            OnlineD += f""" Device: {G}Unknown{E} : {R}{nps[host]['status']['state']}{E} \n""" # get a devices mac, and state and show them
+    return(OnlineD) # returns the devices and statuses
 # sniffer types
   #
 def RawSniff(f=""):
