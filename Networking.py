@@ -7,24 +7,25 @@ try:
     import platform
     from scapy.all import * # optomise later
     import nmap
+    import random
 except:
     print("There was a problem importing packages, make sure the requirements are installed", file=sys.stderr)
     sys.exit()
 # actual code
 R, G, Y, B, P, LB, Grey, E = '\033[31m', '\033[32m', '\033[33m', '\033[34m', '\033[35m', '\033[36m', '\033[37m', '\033[0;0m'
-PctCnt = 0; # the packet count
+global PctCnt = 0; # the packet count
 nps = nmap.PortScanner() # the port scanner
 
 # packet parsers
 def PathP(packet):
     # gets the packets src and destination
     PctCnt += 1
-    print(f"Packet #{PctCnt} @{packet[0][1].src} ―→ {packet[0][1].dst} ")
+    return(f"Packet #{PctCnt} @{packet[0][1].src} ―→ {packet[0][1].dst} ")
     #
 def PacketPrint(in):
     # colors a packet
     # how will this work with curses ?
-    cprint(str(in), 'blue', attrs=["bold"]) # print in blue
+    return(f"{Y}{in}{E}") # return in blue, use RE to make urls awesome and red
   #
 # settings
 
@@ -71,6 +72,20 @@ def CheckDeviceOnline(subnet):
         else: # if there is neither, say unknown
             OnlineD += f""" Device: {G}Unknown{E} : {R}{nps[host]['status']['state']}{E} \n""" # get a devices mac, and state and show them
     return(OnlineD) # returns the devices and statuses
+
+# spoofer boiiiis
+def randomMAC():
+    return [ random.randint(0x5a, 0x9f), # random numbers between hex values, why? becuase numbers @r3n37 1337
+        random.randint(0x07, 0x2f),
+        random.randint(0x00, 0x6f),
+        random.randint(0x00, 0x7f),
+        random.randint(0x00, 0xff),
+        random.randint(0x00, 0xff) ]
+  #
+def MACprettyprint(mac):
+    return ':'.join(map(lambda x: "%02x" % x, mac))
+
+
 # sniffer types
   #
 def RawSniff(f=""):
