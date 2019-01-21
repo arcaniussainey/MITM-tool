@@ -1,3 +1,4 @@
+setuptools
 termcolor
 nmap
 scapy
