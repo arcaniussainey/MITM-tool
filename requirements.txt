@@ -1,4 +1,3 @@
 setuptools
 termcolor
 nmap
-scapy
