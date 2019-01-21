@@ -13,6 +13,9 @@ A MITM tool made by @arcaniussainey and @PopcornFilling
 
     *None
 ### Requirements
+*`sudo apt update`
+*`sudo apt install python3-scapy`
+* setuptools
 * termcolor
 * python3
 * scapy v 2.4
